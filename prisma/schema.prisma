@@ -1,26 +1,29 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
-}
 generator client {
   provider = "prisma-client-js"
 }
 
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
 model Employee {
   id        Int      @id @default(autoincrement())
-  name      String   
-  email     String   @unique 
-  role      Role 
+  name      String   @unique
+  email     String   @unique
+  role      Role
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model playing_with_neon {
+  id    Int    @id @default(autoincrement())
+  name  String
+  value Float? @db.Real
 }
 
 enum Role {
   INTERN
   ENGINEER
-  ADMIN   
+  ADMIN
 }
